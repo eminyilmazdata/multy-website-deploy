@@ -6,7 +6,10 @@ This guide explains how to deploy the Multystamps website to production.
 
 1. **Vercel CLI installed locally** (already installed as dev dependency)
 2. **Vercel account** connected to your GitHub repository
-3. **Domain configured** (`multystamps.be` should be added in Vercel dashboard)
+3. **Vercel authentication** - Run `npx vercel login` if not already logged in
+4. **Domain configured** (`multystamps.be` should be added in Vercel dashboard)
+
+> **Note**: The deploy script will check authentication automatically and prompt you if needed.
 
 ## Important Notes
 
@@ -29,13 +32,19 @@ chmod +x deploy.sh
 ./deploy.sh
 ```
 
-The script will:
-1. ✅ Check for uncommitted changes
-2. ✅ Push changes to `master` branch
-3. ✅ Sync `master` to `main` branch
-4. ✅ Trigger Vercel auto-deployment
-5. ✅ Update domain alias to latest deployment
-6. ✅ Switch you back to `master` branch
+The script will automatically:
+1. ✅ Check Vercel authentication
+2. ✅ Check for uncommitted changes (prompts to commit if needed)
+3. ✅ Push changes to `master` branch
+4. ✅ Sync `master` to `main` branch
+5. ✅ Push to `main` (triggers Vercel auto-deployment)
+6. ✅ Wait for deployment to complete (up to 2 minutes)
+7. ✅ Automatically find the latest ready deployment
+8. ✅ Update domain alias to the latest deployment
+9. ✅ Switch you back to `master` branch
+10. ✅ Show deployment summary
+
+**The script now handles everything automatically - no manual steps needed!**
 
 ### Option 2: Manual Deployment
 
