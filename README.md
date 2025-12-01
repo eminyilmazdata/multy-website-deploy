@@ -1,6 +1,6 @@
 # Multystamps Website
 
-Under construction page for multystamps.be
+Contact page for multystamps.be with links to email and Delcampe webshop.
 
 ## Getting Started
 
@@ -25,12 +25,28 @@ npm run build
 npm start
 ```
 
-## Deploy
+## Deployment
 
-You can deploy this Next.js app to platforms like:
-- Vercel (recommended for Next.js)
-- Netlify
-- Any Node.js hosting service
+**Quick Deploy** (Recommended):
+```bash
+./deploy.sh
+```
 
-Make sure to configure your domain (multystamps.be) to point to your hosting provider.
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+### Quick Reference
+
+- **Repository**: `eminyilmazdata/multy-website-deploy`
+- **Production Branch**: `main` (Vercel auto-deploys from this branch)
+- **Working Branch**: `master` (use this for development)
+- **Domain**: `multystamps.be`
+- **Deploy Script**: `./deploy.sh` (automates the entire process)
+
+## Project Structure
+
+- `app/page.tsx` - Main contact page
+- `app/layout.tsx` - Root layout with metadata
+- `app/globals.css` - Global styles
+- `deploy.sh` - Automated deployment script
+- `DEPLOYMENT.md` - Detailed deployment guide
 
