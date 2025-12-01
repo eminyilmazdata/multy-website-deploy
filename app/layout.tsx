@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Multystamps - Coming Soon',
-  description: 'Multystamps website is under construction. We\'ll be back soon!',
+  title: 'Multystamps - Contact',
+  description: 'Contact Multystamps - Visit our Delcampe webshop or reach us at info@multystamps.be',
 }
 
 export default function RootLayout({
