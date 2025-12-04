@@ -113,41 +113,87 @@ git push origin main --force
 
 ### Website shows "Not Secure" (SSL/HTTPS issues)
 
-If your browser shows the website as "not secure", follow these steps:
+If your browser shows the website as "not secure", the most common cause is **incorrect DNS nameserver configuration**.
 
-1. **Verify domain is added in Vercel**:
-   - Go to Vercel Dashboard → Your Project → Settings → Domains
-   - Ensure `multystamps.be` is listed and shows "Valid Configuration"
-   - If not listed, add it manually
+#### Quick Diagnosis
 
-2. **Check DNS configuration**:
-   - Verify DNS records point to Vercel (usually a CNAME to `cname.vercel-dns.com`)
-   - Use `npx vercel domains ls` to see domain status
-   - DNS propagation can take up to 48 hours
+Check your domain configuration:
+```bash
+npx vercel domains inspect multystamps.be
+```
 
-3. **Wait for SSL certificate**:
-   - Vercel automatically provisions SSL certificates via Let's Encrypt
-   - This can take a few minutes to a few hours after domain is added
-   - Check certificate status in Vercel Dashboard → Domains
+Look for the **Nameservers** section. If it shows:
+- ✘ Current Nameservers: `ns01.one.com`, `ns02.one.com` (or other third-party)
+- Intended Nameservers: `ns1.vercel-dns.com`, `ns2.vercel-dns.com`
 
-4. **Force HTTPS**:
-   - Vercel automatically redirects HTTP to HTTPS
-   - The security headers in `next.config.js` enforce HTTPS
-   - Clear browser cache and try accessing `https://multystamps.be` directly
+**This is the problem!** Vercel needs to manage your DNS to automatically provision SSL certificates.
 
-5. **Verify SSL certificate**:
+#### Solution: Configure DNS Nameservers
+
+You have **two options**:
+
+##### Option 1: Use Vercel Nameservers (Recommended - Easiest)
+
+1. **Log into your domain registrar** (One.com in this case)
+2. **Navigate to DNS/Nameserver settings** for `multystamps.be`
+3. **Change nameservers to**:
+   - `ns1.vercel-dns.com`
+   - `ns2.vercel-dns.com`
+4. **Save changes** and wait 24-48 hours for DNS propagation
+5. **Verify in Vercel**: Run `npx vercel domains inspect multystamps.be` - nameservers should show ✓
+
+**Benefits**: Vercel automatically manages DNS and SSL certificates. No manual DNS record management needed.
+
+##### Option 2: Keep Current Nameservers (Advanced)
+
+If you must keep One.com nameservers, configure DNS records manually:
+
+1. **In One.com DNS panel**, add these records:
+   - **A Record**: `@` (or blank) → `76.76.21.21`
+   - **CNAME Record**: `www` → `cname.vercel-dns.com`
+   - **CAA Record**: `@` → `0 issue "letsencrypt.org"` (allows Vercel to issue SSL)
+
+2. **Wait for DNS propagation** (can take up to 48 hours)
+
+3. **Verify DNS**:
    ```bash
-   # Check domain configuration
-   npx vercel domains ls
-   
-   # Check if domain is properly aliased
-   npx vercel alias ls
+   dig multystamps.be +short  # Should show Vercel IP
+   dig www.multystamps.be +short  # Should show cname.vercel-dns.com
    ```
 
-6. **If SSL still not working**:
-   - Remove and re-add the domain in Vercel dashboard
-   - Wait 10-15 minutes for certificate provisioning
-   - Contact Vercel support if issue persists
+#### After DNS Configuration
+
+1. **Wait for SSL certificate provisioning**:
+   - Vercel automatically provisions SSL certificates via Let's Encrypt
+   - This can take a few minutes to a few hours after DNS is correct
+   - Check certificate status in Vercel Dashboard → Domains
+
+2. **Verify SSL certificate**:
+   ```bash
+   openssl s_client -connect multystamps.be:443 -servername multystamps.be < /dev/null 2>&1 | grep "Verify return code"
+   # Should show: Verify return code: 0 (ok)
+   ```
+
+3. **Test the website**:
+   - Clear browser cache: `Cmd+Shift+R` (Mac) or `Ctrl+Shift+R` (Windows)
+   - Visit `https://multystamps.be` directly
+   - The security headers in `next.config.js` enforce HTTPS
+
+#### Still Not Working?
+
+1. **Check domain status in Vercel Dashboard**:
+   - Go to Vercel Dashboard → Your Project → Settings → Domains
+   - Ensure `multystamps.be` shows "Valid Configuration"
+
+2. **Remove and re-add domain**:
+   - Remove domain from Vercel dashboard
+   - Wait 5 minutes
+   - Re-add the domain
+   - Wait for DNS verification and SSL provisioning
+
+3. **Contact support**:
+   - Vercel Support: https://vercel.com/support
+   - Include output from: `npx vercel domains inspect multystamps.be`
 
 ## Project Structure
 
