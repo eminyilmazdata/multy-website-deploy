@@ -111,6 +111,44 @@ git push origin main --force
 
 ⚠️ **Warning**: Only do this if you're sure `master` has the correct code!
 
+### Website shows "Not Secure" (SSL/HTTPS issues)
+
+If your browser shows the website as "not secure", follow these steps:
+
+1. **Verify domain is added in Vercel**:
+   - Go to Vercel Dashboard → Your Project → Settings → Domains
+   - Ensure `multystamps.be` is listed and shows "Valid Configuration"
+   - If not listed, add it manually
+
+2. **Check DNS configuration**:
+   - Verify DNS records point to Vercel (usually a CNAME to `cname.vercel-dns.com`)
+   - Use `npx vercel domains ls` to see domain status
+   - DNS propagation can take up to 48 hours
+
+3. **Wait for SSL certificate**:
+   - Vercel automatically provisions SSL certificates via Let's Encrypt
+   - This can take a few minutes to a few hours after domain is added
+   - Check certificate status in Vercel Dashboard → Domains
+
+4. **Force HTTPS**:
+   - Vercel automatically redirects HTTP to HTTPS
+   - The security headers in `next.config.js` enforce HTTPS
+   - Clear browser cache and try accessing `https://multystamps.be` directly
+
+5. **Verify SSL certificate**:
+   ```bash
+   # Check domain configuration
+   npx vercel domains ls
+   
+   # Check if domain is properly aliased
+   npx vercel alias ls
+   ```
+
+6. **If SSL still not working**:
+   - Remove and re-add the domain in Vercel dashboard
+   - Wait 10-15 minutes for certificate provisioning
+   - Contact Vercel support if issue persists
+
 ## Project Structure
 
 ```
