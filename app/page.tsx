@@ -2,19 +2,26 @@
 
 import { useState, useEffect } from 'react';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import { Language, translations } from '@/lib/translations';
+import { Language, translations, detectBrowserLanguage } from '@/lib/translations';
 
 export default function Home() {
   const [language, setLanguage] = useState<Language>('nl');
 
-  // Load language preference from localStorage on mount
+  // Load language preference from localStorage on mount, or detect browser language
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as Language;
     if (savedLanguage && ['nl', 'fr', 'en'].includes(savedLanguage)) {
+      // Use saved preference if available
       setLanguage(savedLanguage);
     } else {
-      // Default to Dutch for .be domain
-      setLanguage('nl');
+      // No saved preference - detect browser language
+      const browserLanguage = detectBrowserLanguage();
+      if (browserLanguage) {
+        setLanguage(browserLanguage);
+      } else {
+        // Fall back to Dutch for .be domain if browser language not supported
+        setLanguage('nl');
+      }
     }
   }, []);
 
