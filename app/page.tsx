@@ -10,7 +10,7 @@ export default function Home() {
   // Load language preference from localStorage on mount, or detect browser language
   useEffect(() => {
     const savedLanguage = localStorage.getItem('language') as Language;
-    if (savedLanguage && ['nl', 'fr', 'en'].includes(savedLanguage)) {
+    if (savedLanguage && ['nl', 'fr', 'en', 'de', 'it', 'es'].includes(savedLanguage)) {
       // Use saved preference if available
       setLanguage(savedLanguage);
     } else {

@@ -10,7 +10,7 @@ interface LanguageSwitcherProps {
 
 export default function LanguageSwitcher({ currentLanguage, onLanguageChange }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const languages: Language[] = ['nl', 'fr', 'en'];
+  const languages: Language[] = ['nl', 'fr', 'en', 'de', 'it', 'es'];
 
   // Close dropdown when clicking outside
   useEffect(() => {

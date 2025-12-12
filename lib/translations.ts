@@ -1,4 +1,4 @@
-export type Language = 'nl' | 'fr' | 'en';
+export type Language = 'nl' | 'fr' | 'en' | 'de' | 'it' | 'es';
 
 export interface Translations {
   title: string;
@@ -30,12 +30,36 @@ export const translations: Record<Language, Translations> = {
     emailButton: 'info@multystamps.be',
     webshopButton: 'Visit Our Webshop',
   },
+  de: {
+    title: 'Multystamps - Kontakt',
+    heading: 'Kontaktieren Sie uns',
+    description: 'Nehmen Sie Kontakt mit uns auf oder besuchen Sie unseren Webshop',
+    emailButton: 'info@multystamps.be',
+    webshopButton: 'Besuchen Sie unseren Webshop',
+  },
+  it: {
+    title: 'Multystamps - Contatto',
+    heading: 'Contattaci',
+    description: 'Mettiti in contatto con noi o visita il nostro negozio online',
+    emailButton: 'info@multystamps.be',
+    webshopButton: 'Visita il nostro negozio',
+  },
+  es: {
+    title: 'Multystamps - Contacto',
+    heading: 'Contáctenos',
+    description: 'Póngase en contacto con nosotros o visite nuestra tienda en línea',
+    emailButton: 'info@multystamps.be',
+    webshopButton: 'Visite nuestra tienda',
+  },
 };
 
 export const languageNames: Record<Language, string> = {
   nl: 'Nederlands',
   fr: 'Français',
   en: 'English',
+  de: 'Deutsch',
+  it: 'Italiano',
+  es: 'Español',
 };
 
 /**
@@ -59,7 +83,7 @@ export function detectBrowserLanguage(): Language | null {
   }
 
   // Supported language codes
-  const supportedLanguages: Language[] = ['nl', 'fr', 'en'];
+  const supportedLanguages: Language[] = ['nl', 'fr', 'en', 'de', 'it', 'es'];
 
   // Check each browser language in priority order
   for (const browserLang of browserLanguages) {
