@@ -33,6 +33,19 @@ export default function Home() {
 
   const t = translations[language];
 
+  // Language-specific URL segments for Delcampe
+  const delcampeUrls: Record<Language, string> = {
+    nl: 'https://www.delcampe.net/nl/verzamelingen/store/multy',
+    fr: 'https://www.delcampe.net/fr/collections/store/multy',
+    en: 'https://www.delcampe.net/en_GB/collectables/store/multy',
+    de: 'https://www.delcampe.net/de/sammlerobjekte/store/multy',
+    it: 'https://www.delcampe.net/it/collezionismo/store/multy',
+    es: 'https://www.delcampe.net/es/coleccionismo/store/multy',
+  };
+
+  // Catawiki URL with language
+  const catawikiUrl = `https://www.catawiki.com/${language}/u/285887-multy`;
+
   return (
     <main className="container">
       <LanguageSwitcher currentLanguage={language} onLanguageChange={handleLanguageChange} />
@@ -55,7 +68,7 @@ export default function Home() {
             {t.emailButton}
           </a>
           <a 
-            href="https://www.delcampe.net/nl/verzamelingen/store/multy" 
+            href={delcampeUrls[language]} 
             target="_blank" 
             rel="noopener noreferrer"
             className="contact-button shop-button"
@@ -63,7 +76,18 @@ export default function Home() {
             <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
-            {t.webshopButton}
+            {t.delcampeButton}
+          </a>
+          <a 
+            href={catawikiUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="contact-button shop-button"
+          >
+            <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {t.catawikiButton}
           </a>
         </div>
       </div>

@@ -5,7 +5,8 @@ export interface Translations {
   heading: string;
   description: string;
   emailButton: string;
-  webshopButton: string;
+  delcampeButton: string;
+  catawikiButton: string;
 }
 
 export const translations: Record<Language, Translations> = {
@@ -14,42 +15,48 @@ export const translations: Record<Language, Translations> = {
     heading: 'Neem Contact Op',
     description: 'Neem contact met ons op of bezoek onze webshop',
     emailButton: 'info@multystamps.be',
-    webshopButton: 'Bezoek Onze Webshop',
+    delcampeButton: 'Onze Delcampe Webshop',
+    catawikiButton: 'Onze Catawiki Veilingen',
   },
   fr: {
     title: 'Multystamps - Contact',
     heading: 'Contactez-nous',
     description: 'Contactez-nous ou visitez notre boutique en ligne',
     emailButton: 'info@multystamps.be',
-    webshopButton: 'Visitez Notre Boutique',
+    delcampeButton: 'Notre Boutique Delcampe',
+    catawikiButton: 'Nos Ventes Catawiki',
   },
   en: {
     title: 'Multystamps - Contact',
     heading: 'Contact Us',
     description: 'Get in touch with us or visit our webshop',
     emailButton: 'info@multystamps.be',
-    webshopButton: 'Visit Our Webshop',
+    delcampeButton: 'Our Delcampe Webshop',
+    catawikiButton: 'Our Catawiki Auctions',
   },
   de: {
     title: 'Multystamps - Kontakt',
     heading: 'Kontaktieren Sie uns',
     description: 'Nehmen Sie Kontakt mit uns auf oder besuchen Sie unseren Webshop',
     emailButton: 'info@multystamps.be',
-    webshopButton: 'Besuchen Sie unseren Webshop',
+    delcampeButton: 'Unser Delcampe Webshop',
+    catawikiButton: 'Unsere Catawiki Auktionen',
   },
   it: {
     title: 'Multystamps - Contatto',
     heading: 'Contattaci',
     description: 'Mettiti in contatto con noi o visita il nostro negozio online',
     emailButton: 'info@multystamps.be',
-    webshopButton: 'Visita il nostro negozio',
+    delcampeButton: 'Il nostro negozio Delcampe',
+    catawikiButton: 'Le nostre aste Catawiki',
   },
   es: {
     title: 'Multystamps - Contacto',
     heading: 'Contáctenos',
     description: 'Póngase en contacto con nosotros o visite nuestra tienda en línea',
     emailButton: 'info@multystamps.be',
-    webshopButton: 'Visite nuestra tienda',
+    delcampeButton: 'Nuestra tienda Delcampe',
+    catawikiButton: 'Nuestras subastas Catawiki',
   },
 };
 
